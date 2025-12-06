@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Open Front Camera</title>
+    <style>
+        video {
+            width: 100%;
+            height: auto;
+            background: #000;
+        }
+    </style>
+</head>
+<body>
+
+<h2>Front Camera Preview</h2>
+<video id="camera" autoplay playsinline></video>
+
+<script>
+    async function openFrontCamera() {
+        try {
+            const stream = await navigator.mediaDevices.getUserMedia({
+                video: {
+                    facingMode: "user"   // Front camera
+                },
+                audio: false
+            });
+
+            const video = document.getElementById('camera');
+            video.srcObject = stream;
+
+        } catch (error) {
+            alert("Error opening camera: " + error);
+            console.error(error);
+        }
+    }
+
+    openFrontCamera();
+</script>
+
+</body>
+</html>
